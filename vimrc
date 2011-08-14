@@ -7,6 +7,7 @@ set nocompatible
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
+set nocp
 set nobackup
 set nowritebackup
 set history=50		" keep 50 lines of command line history
@@ -37,6 +38,7 @@ if has("autocmd")
   " Use the default filetype settings, so that mail gets 'tw' set to 72,
   " 'cindent' is on in C files, etc.
   " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin on
   filetype plugin indent on
 
   " Set File type to 'text' for files ending in .txt
@@ -84,6 +86,8 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
+
+
 " Always display the status line
 set laststatus=2
 
@@ -94,24 +98,24 @@ let mapleader = ","
 map <Leader>R :e doc/README_FOR_APP<CR>
 
 " Leader shortcuts for Rails commands
-map <Leader>m :Rmodel 
-map <Leader>c :Rcontroller 
-map <Leader>v :Rview 
-map <Leader>u :Runittest 
-map <Leader>f :Rfunctionaltest 
-map <Leader>tm :RTmodel 
-map <Leader>tc :RTcontroller 
-map <Leader>tv :RTview 
-map <Leader>tu :RTunittest 
-map <Leader>tf :RTfunctionaltest 
-map <Leader>sm :RSmodel 
-map <Leader>sc :RScontroller 
-map <Leader>sv :RSview 
-map <Leader>su :RSunittest 
-map <Leader>sf :RSfunctionaltest 
+map <Leader>m :Rmodel
+map <Leader>c :Rcontroller
+map <Leader>v :Rview
+map <Leader>u :Runittest
+map <Leader>f :Rfunctionaltest
+map <Leader>tm :RTmodel
+map <Leader>tc :RTcontroller
+map <Leader>tv :RTview
+map <Leader>tu :RTunittest
+map <Leader>tf :RTfunctionaltest
+map <Leader>sm :RSmodel
+map <Leader>sc :RScontroller
+map <Leader>sv :RSview
+map <Leader>su :RSunittest
+map <Leader>sf :RSfunctionaltest
 
 " Hide search highlighting
-map <Leader>h :set invhls <CR>
+map <Leader>H :set invhls <CR>
 
 " Opens an edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>e
@@ -204,4 +208,49 @@ function! OpenURL()
   endif
 endfunction
 map <Leader>w :call OpenURL()<CR>
+
+
+" NERD Tree navigation
+map <C-tab> <ESC>:NERDTreeToggle<RETURN>
+nmap <C-tab> <ESC>:NERDTreeToggle<RETURN>
+
+" Make it way easier to switch windows (<leader>w)
+nmap <leader>w <C-w><C-w>_
+
+" Easier ways to navigate windows
+nm , <c-w>
+nn ,, <c-w>p
+nn ,W <c-w>w
+nn ,n :vnew<cr>
+nn ,w :w<cr>
+nn ,x :x<cr>
+
+
+
+" split vertically with <leader> v
+nmap <leader>v :vsplit<CR> <C-w><C-w>
+
+" split horizontally with <leader> s
+nmap <leader>s :split<CR> <C-w><C-w>
+
+" Automatically strip trailing white space
+autocmd BufWritePre * :%s/\s\+$//e
+
+"define :Lorem command to dump in a paragraph of lorem ipsum
+command! -nargs=0 Lorem :normal iLorem ipsum dolor sit amet, consectetur
+      \ adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      \ magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+      \ ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+      \ irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+      \ fugiat nulla pariatur.  Excepteur sint occaecat cupidatat non
+      \ proident, sunt in culpa qui officia deserunt mollit anim id est
+      \ laborum
+
+" Visual
+set showmatch  " Show matching brackets.
+set mat=5  " Bracket blinking.
+" set list
+
+" CTRL-Z undoes even in visual/selection mode
+vnoremap <C-Z> <C-C>
 
